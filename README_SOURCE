@@ -19,5 +19,6 @@ go-parallel-pipeline/Go语言实现并行处理管道
                     |bufio.NewReader(io.Reader) bufio.NewWriter(io.Writer) 缓存读写大数据的优势
                     |channel cap 容量缓存机制
                     |go func(){}() 协程处理具体任务
+                    |外部排序 分块读取大数据文件 两两归并N个节点 递归
                 |--netnodes.go
                     |网络分布式版节点

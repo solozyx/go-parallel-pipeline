@@ -159,6 +159,7 @@ func MergeN(inputs ... <- chan int) <- chan int {
 		return inputs[0]
 	}
 	middle := len(inputs) / 2
+	// TODO 递归
 	// inputs[0...m) inputs[m...end)
 	return  Merge(
 		MergeN(inputs[:middle]...),
@@ -168,8 +169,7 @@ func MergeN(inputs ... <- chan int) <- chan int {
 /*
 分块读取大文件
 */
-func SplitBlockReaderSource(reader io.Reader,
-	chunkSize int) <-chan int {
+func SplitBlockReaderSource(reader io.Reader, chunkSize int) <-chan int {
 	// out := make(chan int)
 	// 给channel增加buffer
 	out := make(chan int,100)
