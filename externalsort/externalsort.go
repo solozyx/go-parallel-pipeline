@@ -10,9 +10,9 @@ import (
 
 func main(){
 	//externalSortSmallTest()
-	externalSortLargeTest()
+	//externalSortLargeTest()
 	//netExternalSortSmallTest()
-	//netExternalSortLargeTest()
+	netExternalSortLargeTest()
 }
 
 func wtrteToFile(inChan <- chan int,filePath string) {
@@ -97,7 +97,7 @@ func externalSortLargeTest(){
 		chunkCount int
 	)
 	filePath = datasource.EXTERNAL_SORT_LARGE_IN_FILE
-	fileSize = datasource.EXTERNAL_SORT_LARGE_IN_FILE_SIZE
+	fileSize = 8 * datasource.EXTERNAL_SORT_LARGE_IN_FILE_SIZE
 	chunkCount = datasource.EXTERNAL_SORT_CHUNK_COUNT
 
 	// 一边运行pipeline
@@ -146,22 +146,17 @@ func netExternalSortSmallTest(){
 		fileSize int
 		chunkCount int
 	)
-	filePath = "F:/_gotestdata/small.in"
-	fileSize = 32 * 8
-	chunkCount = 4
+	filePath = datasource.EXTERNAL_SORT_SMALL_IN_FILE
+	fileSize = 8 * datasource.EXTERNAL_SORT_SMALL_IN_FILE_SIZE
+	chunkCount = datasource.EXTERNAL_SORT_CHUNK_COUNT
 
 	printFile(filePath)
 	fmt.Println("-----------------")
 
 	// 一边运行pipeline
-	// TODO TEST server
-	// createNetworkPipeline(filePath,fileSize,chunkCount)
-	// time.Sleep(time.Hour)
-	// return
-
 	p := createNetworkPipeline(filePath,fileSize,chunkCount)
 	// 一边写文件
-	fileOutPath := "F:/_gotestdata/small.out"
+	fileOutPath := datasource.EXTERNAL_SORT_SMALL_OUT_FILE
 	wtrteToFile(p,fileOutPath)
 	// 打印最终排序结果
 	printFile(fileOutPath)
@@ -173,14 +168,14 @@ func netExternalSortLargeTest(){
 		fileSize int
 		chunkCount int
 	)
-	filePath = "F:/_gotestdata/largedata.in"
-	fileSize = 800*1000*1000
-	chunkCount = 4
+	filePath = datasource.EXTERNAL_SORT_LARGE_IN_FILE
+	fileSize = 8 * datasource.EXTERNAL_SORT_LARGE_IN_FILE_SIZE
+	chunkCount = datasource.EXTERNAL_SORT_CHUNK_COUNT
 
 	// 一边运行pipeline
 	p := createNetworkPipeline(filePath,fileSize,chunkCount)
 	// 一边写文件
-	fileOutPath := "F:/_gotestdata/largedata.out"
+	fileOutPath := datasource.EXTERNAL_SORT_LARGE_OUT_FILE
 	wtrteToFile(p,fileOutPath)
 	// 打印最终排序结果
 	printFile(fileOutPath)

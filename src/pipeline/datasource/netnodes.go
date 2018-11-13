@@ -54,7 +54,7 @@ func NetworkSource(addr string) <-chan int {
 		if conn,err = net.Dial("tcp",addr); err != nil {
 			panic(err)
 		}
-		// todo close
+		// TODO close connection
 		readChan = SplitBlockReaderSource(bufio.NewReader(conn),-1)
 		for v = range readChan {
 			out <- v
