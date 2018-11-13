@@ -40,12 +40,11 @@ func createFile() {
 		filepath string
 		numCount int
 	)
-	filepath = "./_gotestdata/small.in"
-	numCount = 32
+	// filepath = "./_gotestdata/small.in"
+	// numCount = 32
 
-	// filepath = "./_gotestdata/largedata.in"
-	// 100MB * 8 = 800MB 大文件 生成的非常慢
-	// numCount = 100 * 1000 * 1000
+	filepath = datasource.EXTERNAL_SORT_LARGE_IN_FILE
+	numCount = datasource.EXTERNAL_SORT_LARGE_IN_FILE_SIZE
 
 	// 写文件
 	file, err := os.Create(filepath)
@@ -101,6 +100,6 @@ func main() {
 	//fordemo()
 	//forrangedemo()
 	//mergeDemo()
-	//createFile()
-	readFile()
+	createFile()
+	//readFile()
 }

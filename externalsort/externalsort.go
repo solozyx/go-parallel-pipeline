@@ -9,8 +9,8 @@ import (
 )
 
 func main(){
-	externalSortSmallTest()
-	//externalSortLargeTest()
+	//externalSortSmallTest()
+	externalSortLargeTest()
 	//netExternalSortSmallTest()
 	//netExternalSortLargeTest()
 }
@@ -96,18 +96,20 @@ func externalSortLargeTest(){
 		fileSize int
 		chunkCount int
 	)
-	filePath = "F:/_gotestdata/largedata.in"
-	fileSize = 800*1000*1000
-	chunkCount = 4
+	filePath = datasource.EXTERNAL_SORT_LARGE_IN_FILE
+	fileSize = datasource.EXTERNAL_SORT_LARGE_IN_FILE_SIZE
+	chunkCount = datasource.EXTERNAL_SORT_CHUNK_COUNT
 
 	// 一边运行pipeline
 	p := createPipeline(filePath,fileSize,chunkCount)
 	// 一边写文件
-	fileOutPath := "F:/_gotestdata/largedata.out"
+	fileOutPath := datasource.EXTERNAL_SORT_LARGE_OUT_FILE
 	wtrteToFile(p,fileOutPath)
 	// 打印最终排序结果
 	printFile(fileOutPath)
 }
+
+// TODO 网络版外部排序
 
 func createNetworkPipeline(filePath string,fileSize,chunkCount int) <- chan int {
 	chunkSize := fileSize / chunkCount
