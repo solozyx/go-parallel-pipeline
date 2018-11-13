@@ -101,7 +101,6 @@ func ReaderSource(reader io.Reader) <-chan int {
 	out := make(chan int,100)
 	go func() {
 		// golang 的 int 根据操作系统 64位机 int就是64位
-		// TODO
 		buffer := make([]byte,8) // byte * 8 = 64位int
 		for {
 			// 返回 读取到的byte数 error 读到EOF则有错误
@@ -112,7 +111,6 @@ func ReaderSource(reader io.Reader) <-chan int {
 				// binary.LittleEndian
 				// binary.BigEndian 高位在高字节
 				// 读写统一即可
-				// TODO
 				// 无符号
 				// binary.BigEndian.Uint64()
 				// 转成有符号的int
@@ -133,7 +131,6 @@ func ReaderSource(reader io.Reader) <-chan int {
 */
 func WriteSink(writer io.Writer,inChan <-chan int) {
 	for v := range inChan {
-		// TODO
 		buffer := make([]byte,8)
 		binary.BigEndian.PutUint64(buffer,uint64(v))
 		writer.Write(buffer)

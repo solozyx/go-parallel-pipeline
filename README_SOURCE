@@ -1,22 +1,23 @@
-go-distributed-crontab/Go语言实现分布式crontab
+go-parallel-pipeline/Go语言实现并行处理管道
     |
-    |--master/分布式master节点cmd
-        |--master.go
-            |master节点启动 根据机器CPU设置运行线程数 命令行参数
-        |--master.json
-            |分布式master节点配置文件
+    |--demo/
+        |--main.go
+            |内部测试函数 channel for遍历 for-range遍历 创建二进制文件 读取二进制文件
+        |--_gotestdata/
+            |生成测试数据 配置GoLand设置main.go 运行目录为 demo /
+            |这里只上传small.in
+    |--externalsort/ 外部排序
+        |--externalsort.go
     |--src/
-        |--master/分布式master节点
-            |
-            |--ApiServer.go
-                |http server 模块的单例模式 初始化HTTP服务 go func(){}()协程监听客户端访问 任务job保存到etcd中 handleJobSave
-                |http POST请求提交任务解析POST表单 http response API封装 interface{}空接口灵活使用
-            |--Config.go
-                |--配置文件master.json解析 struct标签语法 json反序列化 配置单例
-        |--worker/
-
-        |--common/共享工具
-            |--Protocol.go
-                |http应答
-            |--Constants.go
-                |常量包 增强语义 便于维护
+        |--pipeline/ 处理管道
+            |--main.go
+                |--内部测试函数
+            |--datasource/ 数据源数据处理
+                |--nodes.go
+                    |单机版节点 随机生成小数据测试数据源 内部排序 归并函数
+                    |io.Reader io.Writer 面向接口编程 处理不同数据源
+                    |bufio.NewReader(io.Reader) bufio.NewWriter(io.Writer) 缓存读写大数据的优势
+                    |channel cap 容量缓存机制
+                    |go func(){}() 协程处理具体任务
+                |--netnodes.go
+                    |网络分布式版节点

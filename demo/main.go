@@ -40,12 +40,12 @@ func createFile() {
 		filepath string
 		numCount int
 	)
-	filepath = "F:/_gotestdata/largedata.in"
-	//100MB * 8 = 800MB 大文件 生成的非常慢
-	numCount = 100 * 1000 * 1000
+	filepath = "./_gotestdata/small.in"
+	numCount = 32
 
-	//filepath = "F:/_gotestdata/small.in"
-	//numCount = 32
+	// filepath = "./_gotestdata/largedata.in"
+	// 100MB * 8 = 800MB 大文件 生成的非常慢
+	// numCount = 100 * 1000 * 1000
 
 	// 写文件
 	file, err := os.Create(filepath)
@@ -70,13 +70,19 @@ func readFile() {
 	var (
 		filepath string
 	)
-	filepath = "F:/_gotestdata/largedata.in"
+	// 小数据 测试
+	filepath = "./_gotestdata/small.in"
+
+	// 大数据
+	// filepath = "./_gotestdata/largedata.in"
+
 	//读文件
 	file,err := os.Open(filepath)
 	if err != nil {
 		panic(err)
 	}
 	defer file.Close()
+
 	// *File 就是 io.Reader
 	// readerSource := datasource.ReaderSource(file)
 	// 用 bufio.NewReader(file) 包装 默认的buffer size
@@ -95,6 +101,6 @@ func main() {
 	//fordemo()
 	//forrangedemo()
 	//mergeDemo()
-	createFile()
-	//readFile()
+	//createFile()
+	readFile()
 }
